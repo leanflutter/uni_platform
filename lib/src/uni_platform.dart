@@ -51,4 +51,30 @@ class UniPlatform {
     }
     throw Exception('No platform selected');
   }
+
+  static T call<T>({
+    T Function()? android,
+    T Function()? fuchsia,
+    T Function()? iOS,
+    T Function()? linux,
+    T Function()? macOS,
+    T Function()? windows,
+    T Function()? web,
+    T Function()? desktop,
+    T Function()? mobile,
+    T Function()? otherwise,
+  }) {
+    return select<ValueGetter<T>>(
+      android: android,
+      fuchsia: fuchsia,
+      iOS: iOS,
+      linux: linux,
+      macOS: macOS,
+      windows: windows,
+      web: web,
+      desktop: desktop,
+      mobile: mobile,
+      otherwise: otherwise,
+    )();
+  }
 }
