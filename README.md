@@ -1,18 +1,73 @@
 # uni_platform
 
-A new Flutter plugin project.
+[![pub version][pub-image]][pub-url] [![][discord-image]][discord-url]
 
-## Getting Started
+[pub-image]: https://img.shields.io/pub/v/uni_platform.svg
+[pub-url]: https://pub.dev/packages/uni_platform
+[discord-image]: https://img.shields.io/discord/884679008049037342.svg
+[discord-url]: https://discord.gg/zPa6EZ2jqb
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+Replaces the Platform class and works on any platform.
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
 
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Quick Start](#quick-start)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Quick Start
+
+### Installation
+
+Add this to your package's pubspec.yaml file:
+
+```yaml
+dependencies:
+  uni_platform: ^0.1.0
+```
+
+### Usage
+
+select method:
+
+```dart
+import 'package:uni_platform/uni_platform.dart';
+
+String platformType = UniPlatform.select<String>(
+  android: 'Android',
+  fuchsia: 'Fuchsia',
+  iOS: 'iOS',
+  linux: 'Linux',
+  macOS: 'macOS',
+  windows: 'Windows',
+  web: 'Web',
+  otherwise: 'Unknown',
+);
+```
+
+call method:
+
+```dart
+String platformType = UniPlatform.call<String>(
+  android: () => 'Android',
+  fuchsia: () => 'Fuchsia',
+  iOS: () => 'iOS',
+  linux: () => 'Linux',
+  macOS: () => 'macOS',
+  windows: () => 'Windows',
+  web: () => 'Web',
+  otherwise: () => 'Unknown',
+);
+```
+
+> Please see the example app of this plugin for a full example.
+
+## License
+
+[MIT](./LICENSE)
