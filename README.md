@@ -29,7 +29,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  uni_platform: ^0.1.0
+  uni_platform: ^0.1.1
 ```
 
 ### Usage
