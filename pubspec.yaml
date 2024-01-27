@@ -1,6 +1,6 @@
 name: uni_platform
-description: "Replaces the Platform class and works on any platform."
-version: 0.1.0
+description: "Substitutes the Platform class, ensuring works across all platforms."
+version: 0.1.1
 homepage: https://github.com/leanflutter/uni_platform
 
 environment:
@@ -10,9 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  mostly_reasonable_lints: ^0.1.1

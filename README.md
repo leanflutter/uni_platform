@@ -7,7 +7,7 @@
 [discord-image]: https://img.shields.io/discord/884679008049037342.svg
 [discord-url]: https://discord.gg/zPa6EZ2jqb
 
-Replaces the Platform class and works on any platform.
+Substitutes the Platform class, ensuring works across all platforms.
 
 ---
 

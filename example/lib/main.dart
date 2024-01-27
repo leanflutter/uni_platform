@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -24,11 +24,8 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformType;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
     try {
       platformType = UniPlatform.select<String>(
         android: 'Android',
@@ -41,12 +38,9 @@ class _MyAppState extends State<MyApp> {
         otherwise: 'Unknown',
       );
     } on PlatformException {
-      platformType = 'Failed to get platform version.';
+      platformType = 'Failed to get platform type.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
