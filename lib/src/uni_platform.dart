@@ -4,26 +4,40 @@ import 'package:flutter/foundation.dart';
 
 /// Substitutes the Platform class, ensuring works across all platforms.
 class UniPlatform {
+  static String? _operatingSystem;
+
+  static String get operatingSystem {
+    if (!kIsWeb) {
+      _operatingSystem ??= Platform.operatingSystem;
+    }
+    return _operatingSystem ?? 'unknown';
+  }
+
+  @visibleForTesting
+  static set operatingSystem(String value) {
+    _operatingSystem = value;
+  }
+
   /// Whether the platform is Android.
-  static bool get isAndroid => !kIsWeb && Platform.isAndroid;
+  static bool get isAndroid => (operatingSystem == 'android');
 
   /// Whether the platform is Fuchsia.
-  static bool get isFuchsia => !kIsWeb && Platform.isFuchsia;
+  static bool get isFuchsia => (operatingSystem == 'fuchsia');
 
   /// Whether the platform is iOS.
-  static bool get isIOS => !kIsWeb && Platform.isIOS;
+  static bool get isIOS => (operatingSystem == 'ios');
 
   /// Whether the platform is Linux.
-  static bool get isLinux => !kIsWeb && Platform.isLinux;
+  static bool get isLinux => (operatingSystem == 'linux');
 
   /// Whether the platform is macOS.
-  static bool get isMacOS => !kIsWeb && Platform.isMacOS;
+  static bool get isMacOS => (operatingSystem == 'macos');
 
   /// Whether the platform is Web.
   static bool get isWeb => kIsWeb;
 
   /// Whether the platform is Windows.
-  static bool get isWindows => !kIsWeb && Platform.isWindows;
+  static bool get isWindows => (operatingSystem == 'windows');
 
   /// Selects a value with the specified platform.
   ///
