@@ -42,9 +42,9 @@ import 'package:uni_platform/uni_platform.dart';
 String platformType = UniPlatform.select<String>(
   android: 'Android',
   fuchsia: 'Fuchsia',
-  iOS: 'iOS',
+  ios: 'iOS',
   linux: 'Linux',
-  macOS: 'macOS',
+  macos: 'macOS',
   windows: 'Windows',
   web: 'Web',
   otherwise: 'Unknown',
@@ -57,9 +57,9 @@ call method:
 String platformType = UniPlatform.call<String>(
   android: () => 'Android',
   fuchsia: () => 'Fuchsia',
-  iOS: () => 'iOS',
+  ios: () => 'iOS',
   linux: () => 'Linux',
-  macOS: () => 'macOS',
+  macos: () => 'macOS',
   windows: () => 'Windows',
   web: () => 'Web',
   otherwise: () => 'Unknown',

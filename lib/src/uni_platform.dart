@@ -48,9 +48,9 @@ class UniPlatform {
     // Specified based on platform type
     T? android,
     T? fuchsia,
-    T? iOS,
+    T? ios,
     T? linux,
-    T? macOS,
+    T? macos,
     T? windows,
     T? web,
     // Specified based on device type
@@ -65,12 +65,12 @@ class UniPlatform {
       return android;
     } else if (isFuchsia && fuchsia != null) {
       return fuchsia;
-    } else if (isIOS && iOS != null) {
-      return iOS;
+    } else if (isIOS && ios != null) {
+      return ios;
     } else if (isLinux && linux != null) {
       return linux;
-    } else if (isMacOS && macOS != null) {
-      return macOS;
+    } else if (isMacOS && macos != null) {
+      return macos;
     } else if (isWindows && windows != null) {
       return windows;
     } else if (isWeb && web != null) {
@@ -105,9 +105,9 @@ class UniPlatform {
   static T call<T>({
     T Function()? android,
     T Function()? fuchsia,
-    T Function()? iOS,
+    T Function()? ios,
     T Function()? linux,
-    T Function()? macOS,
+    T Function()? macos,
     T Function()? windows,
     T Function()? web,
     T Function()? desktop,
@@ -117,9 +117,9 @@ class UniPlatform {
     return select<ValueGetter<T>>(
       android: android,
       fuchsia: fuchsia,
-      iOS: iOS,
+      ios: ios,
       linux: linux,
-      macOS: macOS,
+      macos: macos,
       windows: windows,
       web: web,
       desktop: desktop,

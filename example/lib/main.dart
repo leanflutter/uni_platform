@@ -30,9 +30,9 @@ class _MyAppState extends State<MyApp> {
       platformType = UniPlatform.select<String>(
         android: 'Android',
         fuchsia: 'Fuchsia',
-        iOS: 'iOS',
+        ios: 'iOS',
         linux: 'Linux',
-        macOS: 'macOS',
+        macos: 'macOS',
         windows: 'Windows',
         web: 'Web',
         otherwise: 'Unknown',
