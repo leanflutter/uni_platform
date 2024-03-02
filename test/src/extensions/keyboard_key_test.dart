@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:uni_platform/src/extensions/keyboard_key.dart';
-import 'package:uni_platform/uni_platform.dart';
+import 'package:uni_platform/src/uni_platform.dart';
 
 void main() {
   test('Verify keymap', () async {
@@ -58,13 +58,23 @@ Map<int, int> _keymap = {
     expect(PhysicalKeyboardKey.keyA.logicalKey, LogicalKeyboardKey.keyA);
     expect(PhysicalKeyboardKey.keyB.logicalKey, LogicalKeyboardKey.keyB);
     expect(PhysicalKeyboardKey.keyC.logicalKey, LogicalKeyboardKey.keyC);
+    UniPlatform.operatingSystem = 'linux';
+    expect(PhysicalKeyboardKey.keyA.keyCode, 0x61);
+    expect(PhysicalKeyboardKey.keyB.keyCode, 0x62);
+    expect(PhysicalKeyboardKey.keyC.keyCode, 0x63);
+    expect(PhysicalKeyboardKey.f12.keyCode, 0xffc9);
+    expect(PhysicalKeyboardKey.f13.keyCode, 0xffca);
     UniPlatform.operatingSystem = 'macos';
     expect(PhysicalKeyboardKey.keyA.keyCode, 0x00);
     expect(PhysicalKeyboardKey.keyB.keyCode, 0x0b);
     expect(PhysicalKeyboardKey.keyC.keyCode, 0x08);
+    expect(PhysicalKeyboardKey.f12.keyCode, 111);
+    expect(PhysicalKeyboardKey.f13.keyCode, 105);
     UniPlatform.operatingSystem = 'windows';
     expect(PhysicalKeyboardKey.keyA.keyCode, 0x41);
     expect(PhysicalKeyboardKey.keyB.keyCode, 0x42);
     expect(PhysicalKeyboardKey.keyC.keyCode, 0x43);
+    expect(PhysicalKeyboardKey.f12.keyCode, 0x7b);
+    expect(PhysicalKeyboardKey.f13.keyCode, 0x7c);
   });
 }

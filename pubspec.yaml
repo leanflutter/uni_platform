@@ -1,6 +1,6 @@
 name: uni_platform
 description: "Substitutes the Platform class, ensuring works across all platforms."
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/leanflutter/uni_platform
 
 environment:

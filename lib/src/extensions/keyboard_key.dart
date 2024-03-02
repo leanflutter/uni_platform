@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:uni_platform/uni_platform.dart';
+import 'package:uni_platform/src/uni_platform.dart';
 
 /// Map of logical key id to physical key id.
 Map<int, int> _keymap = {
@@ -236,16 +236,25 @@ Map<int, int> _keymap = {
   0x0020000031f: 0x0005ff1f, // Game Button Z
 };
 
+extension _ExtendedIterable<T> on Iterable<T> {
+  /// The first element satisfying [test], or `null` if there are none.
+  T? firstWhereOrNull(bool Function(T element) test) {
+    for (var element in this) {
+      if (test(element)) return element;
+    }
+    return null;
+  }
+}
+
 /// Extension methods for [LogicalKeyboardKey].
 extension ExtendedLogicalKeyboardKey on LogicalKeyboardKey {
   PhysicalKeyboardKey? get physicalKey {
     int? usageCode = _keymap.entries
-        .firstWhere(
+        .firstWhereOrNull(
           (entry) => entry.key == keyId,
-          orElse: () => const MapEntry(-1, -1),
         )
-        .value;
-    if (usageCode == -1) return null;
+        ?.value;
+    if (usageCode == null) return null;
     return PhysicalKeyboardKey.findKeyByCode(usageCode);
   }
 }
@@ -254,34 +263,31 @@ extension ExtendedLogicalKeyboardKey on LogicalKeyboardKey {
 extension ExtendedPhysicalKeyboardKey on PhysicalKeyboardKey {
   LogicalKeyboardKey? get logicalKey {
     int? keyId = _keymap.entries
-        .firstWhere(
-          (entry) => entry.value == usbHidUsage,
-          orElse: () => const MapEntry(-1, -1),
-        )
-        .key;
+        .firstWhereOrNull((entry) => entry.value == usbHidUsage)
+        ?.key;
+    if (keyId == null) return null;
     return LogicalKeyboardKey.findKeyByKeyId(keyId);
   }
 
   /// Returns the [keyCode] of this [PhysicalKeyboardKey].
   int? get keyCode {
     return UniPlatform.call<int?>(
+      linux: () {
+        int? matchedKeyCode = kGtkToLogicalKey.entries
+            .firstWhereOrNull((entry) => entry.value == logicalKey)
+            ?.key;
+        if (matchedKeyCode != null) return matchedKeyCode;
+        return logicalKey?.keyId;
+      },
       macos: () {
-        int? code = kMacOsToPhysicalKey.entries
-            .firstWhere(
-              (entry) => entry.value == this,
-              orElse: () => const MapEntry(-1, PhysicalKeyboardKey(-1)),
-            )
-            .key;
-        return code == -1 ? null : code;
+        return kMacOsToPhysicalKey.entries
+            .firstWhereOrNull((entry) => entry.value == this)
+            ?.key;
       },
       windows: () {
-        int? code = kWindowsToLogicalKey.entries
-            .firstWhere(
-              (entry) => entry.value == logicalKey,
-              orElse: () => const MapEntry(-1, LogicalKeyboardKey(-1)),
-            )
-            .key;
-        return code == -1 ? null : code;
+        return kWindowsToLogicalKey.entries
+            .firstWhereOrNull((entry) => entry.value == logicalKey)
+            ?.key;
       },
     );
   }

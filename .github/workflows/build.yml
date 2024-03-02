@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.2"
+          channel: "stable"
+      - working-directory: ./example
+        run: |
+          flutter build macos --release
+
+  build-web:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.2"
+          channel: "stable"
+      - working-directory: ./example
+        run: |
+          flutter build web --release

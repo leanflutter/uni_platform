@@ -1,3 +1,7 @@
+## 0.1.3
+
+* chore: `ExtendedPhysicalKeyboardKey` support linux platform
+
 ## 0.1.2
 
 * feat: Extension methods for `LogicalKeyboardKey` and `PhysicalKeyboardKey` 
